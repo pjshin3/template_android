@@ -1,5 +1,8 @@
 package philip.android.frame.domain
 
-interface BaseUseCase {
-    fun invoke()
+import kotlinx.coroutines.flow.Flow
+
+
+interface BaseUseCase<T> {
+    fun invoke(): Flow<Result<T>>
 }
