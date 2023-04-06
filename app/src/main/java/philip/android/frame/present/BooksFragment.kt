@@ -21,10 +21,10 @@ class BooksFragment: BaseFragment<FragmentBooksBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenCreated {
-            booksDataVIewModel.getBookList()
-                .collect {
-                    Log.e("philip","philip 테스트 입니다 ${it.isSuccess}")
-                }
+//            booksDataVIewModel.getBookList()
+//                .collect {
+//                    Log.e("philip","philip 테스트 입니다 ${it.isSuccess}")
+//                }
         }
     }
 }

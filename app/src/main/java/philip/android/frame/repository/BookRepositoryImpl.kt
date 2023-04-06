@@ -9,6 +9,9 @@ class BookRepositoryImpl(
     private val localDataSource: BookLocalDataSource
 ): BookRepository {
     override fun invoke(): Flow<Result<List<Book>>> = flow {
-        emit(Result.success(arrayListOf(Book("philip_test"))))
+
+        val result = remoteDataSource.remoteApi()
+
+        emit(Result.success(arrayListOf(Book(result))))
     }
 }

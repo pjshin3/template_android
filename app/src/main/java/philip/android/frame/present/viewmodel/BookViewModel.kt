@@ -1,9 +1,10 @@
 package philip.android.frame.present.viewmodel
 
+import androidx.lifecycle.ViewModel
 import philip.android.frame.domain.BookUseCase
 
 class BookViewModel (
     private val bookUseCase: BookUseCase
-): BaseViewModel() {
+): ViewModel() {
     fun getBookList() = bookUseCase.invoke()
 }
