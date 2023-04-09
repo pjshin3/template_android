@@ -9,6 +9,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.koinApplication
 import org.koin.dsl.module
 import philip.android.frame.di.databaseModule
+import philip.android.frame.di.networkModule
 import philip.android.frame.di.viewModelModule
 
 class MainApplication: Application(){
@@ -20,6 +21,7 @@ class MainApplication: Application(){
             androidContext(applicationContext)
             modules(listOf(
                 databaseModule,
+                networkModule,
                 viewModelModule))
         }
     }

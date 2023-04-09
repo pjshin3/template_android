@@ -15,6 +15,6 @@ val viewModelModule = module {
     viewModel { BookViewModel(get()) }
     single { BookUseCase(get(BookRepositoryImpl::class) as BookRepository) }
     single { BookRepositoryImpl(get(), get())}
-    single { BookRemoteDataSource() }
+    single { BookRemoteDataSource(get()) }
     single { BookLocalDataSource() }
 }
