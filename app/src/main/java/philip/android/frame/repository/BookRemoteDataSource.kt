@@ -2,6 +2,8 @@ package philip.android.frame.repository
 
 import android.util.Log
 import com.google.gson.JsonArray
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -13,23 +15,33 @@ import retrofit2.http.GET
 class BookRemoteDataSource(
     val retrofit: Retrofit
 ) {
+
+    data class Post(
+        val id : String = "",
+        var userId: String = "",
+        var title : String = "",
+        var body: String = ""
+    )
+
     interface PostApiService{
         @GET("posts")
-        fun getPosts(): Call<JsonArray>
+        fun getPosts(): Single<List<Post>>
 
     }
 
     fun getPostsRemoteData() {
         retrofit.create(PostApiService::class.java)
             .getPosts()
-            .enqueue(object : Callback<JsonArray>{
-                override fun onResponse(call: Call<JsonArray>, response: Response<JsonArray>) {
-                    val data = response.body()
-                }
+            .subscribeOn(Schedulers.io())
+            .map {
+                Log.e("philip", "테스트 입니다 = ${it.size}")
+            }
+            .onErrorReturn { t ->
+                Log.e("philip","실패 = $t")
+            }
+            .map {
 
-                override fun onFailure(call: Call<JsonArray>, t: Throwable) {
-
-                }
-            })
+            }
+            .subscribe()
     }
 }
